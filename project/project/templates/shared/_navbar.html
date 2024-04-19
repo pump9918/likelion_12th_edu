@@ -3,4 +3,27 @@
     <a class="navbar-link" href="{% url 'main:mainpage' %}">DGU_likelion_12th</a>
     <!-- secondpage 링크 연결 -->
     <a class="navbar-link" href="{% url 'main:secondpage' %}">Second Page</a>
+
+    <li class="nav-item dropdown">
+        {% if user.is_authenticated %}
+        <!--로그인 시 보이는 화면-->
+        <a class="nav-link dropdwon-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{user.username}}
+        </a>
+        <ul class="drowpdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">로그아웃</a></li>
+            <li><a class="dropdown-item" href="#">mypage</a></li>
+        </ul>
+
+        {% else %}
+        <!--로그아웃 시 보이는 화면-->
+        <a class="nav-link dropdwon-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            로그인
+        </a>
+        <ul class="drowpdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'accounts:login' %}">로그인</a></li>
+            <li><a class="dropdown-item" href="#">signup</a></li>
+        </ul>
+
+        {% endif %}
 </nav>
