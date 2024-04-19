@@ -16,4 +16,8 @@ def login(request):
         
     elif request.method == 'GET':
         return render(request, 'accounts/login.html')
-    
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect('main:mainpage')
