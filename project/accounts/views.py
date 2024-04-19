@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
+from django.contrib.auth.models import User
 
 def login(request):
     if request.method == 'POST':
@@ -21,3 +22,18 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('main:mainpage')
+
+
+def signup(request):
+    if request.method == 'POST':
+        
+        if request.POST['password'] == request.POST['confirm']:
+            user = User.objects.create_user(
+                username=request.POST['username'],
+                password=request.POST['password']
+            )
+            
+            auth.login(request, user)
+            return redirect('/')
+        
+    return render(request, 'accounts/signup.html')
