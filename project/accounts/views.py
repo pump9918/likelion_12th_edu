@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.contrib.auth.models import User
+from .models import Profile
 
 def login(request):
     if request.method == 'POST':
@@ -32,6 +33,11 @@ def signup(request):
                 username=request.POST['username'],
                 password=request.POST['password']
             )
+            nickname=request.POST['nickname']
+            department=request.POST['department']
+            
+            profile = Profile(user=user, nickname=nickname, department=department)
+            profile.save()
             
             auth.login(request, user)
             return redirect('/')
