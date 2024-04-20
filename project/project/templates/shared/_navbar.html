@@ -4,26 +4,21 @@
     <!-- secondpage 링크 연결 -->
     <a class="navbar-link" href="{% url 'main:secondpage' %}">Second Page</a>
 
-    <li class="nav-item dropdown">
+    <!--사용자 인증 정보-->
+    <div class="nav-right">
         {% if user.is_authenticated %}
-        <!--로그인 시 보이는 화면-->
-        <a class="nav-link dropdwon-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {{user.username}}
-        </a>
-        <ul class="drowpdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">로그아웃</a></li>
-            <li><a class="dropdown-item" href="{% url 'users:mypage' %}">mypage</a></li>
+        <!-- 로그인 시 보이는 화면 -->
+        <ul class="nav-link-account">
+            <li class="nav-link-user">{{user.username}}</li>
+            <li><a href="{% url 'accounts:logout' %}">로그아웃</a></li>
+            <li><a href="{% url 'users:mypage' %}">mypage</a></li>
         </ul>
-
         {% else %}
-        <!--로그아웃 시 보이는 화면-->
-        <a class="nav-link dropdwon-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            로그인
-        </a>
-        <ul class="drowpdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="{% url 'accounts:login' %}">로그인</a></li>
-            <li><a class="dropdown-item" href="{% url 'accounts:signup' %}">signup</a></li>
+        <!-- 로그아웃 시 보이는 화면 -->
+        <ul class="nav-link-account">
+            <li><a href="{% url 'accounts:login' %}">로그인</a></li>
+            <li><a href="{% url 'accounts:signup' %}">signup</a></li>
         </ul>
-
         {% endif %}
+    </div>
 </nav>
